@@ -898,341 +898,354 @@
     </div>
 
 
-    <script>
+   <script>
+    const chatArea = document.getElementById("chatArea");
+    const messageInput = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
+    const newChatButton = document.getElementById("newChat");
+    const welcome = document.getElementById("welcome");
 
-        /* =========================
-           ELEMENTS
-        ========================== */
+    function escapeHTML(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+    }
 
-        const chatArea =
-            document.getElementById(
-                "chatArea"
-            );
+    function addMessage(text, type) {
 
+        const message = document.createElement("div");
 
-        const messageInput =
-            document.getElementById(
-                "messageInput"
-            );
+        message.className = `message ${type}`;
 
+        message.innerHTML = `
+            <div class="message-avatar">
+                ${type === "user" ? "👤" : "✦"}
+            </div>
 
-        const sendButton =
-            document.getElementById(
-                "sendButton"
-            );
+            <div class="message-content">
+                ${escapeHTML(text)}
+            </div>
+        `;
 
+        chatArea.appendChild(message);
 
-        const newChatButton =
-            document.getElementById(
-                "newChat"
-            );
-
-
-        const welcome =
-            document.getElementById(
-                "welcome"
-            );
-
-
-        const suggestions =
-            document.querySelectorAll(
-                ".suggestions button"
-            );
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
 
 
-        /* =========================
-           ESCAPE HTML
-        ========================== */
+    function getNexoraResponse(text) {
 
-        function escapeHTML(text) {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-            div.textContent = text;
-
-            return div.innerHTML;
-
-        }
+        const input = text.toLowerCase().trim();
 
 
-        /* =========================
-           ADD MESSAGE
-        ========================== */
-
-        function addMessage(
-            text,
-            type
+        if (
+            input.includes("hello") ||
+            input.includes("hi") ||
+            input.includes("hey")
         ) {
-
-            const message =
-                document.createElement(
-                    "div"
-                );
+            return "Hello! 👋 I'm Nexora. How can I help you?";
+        }
 
 
-            message.className =
-                "message " + type;
+        if (
+            input.includes("who are you") ||
+            input.includes("what are you")
+        ) {
+            return "I'm Nexora, your AI-style digital assistant. 🚀";
+        }
 
 
-            const avatar =
-                type === "user"
-                    ? "👤"
-                    : "✦";
+        if (
+            input.includes("your name") ||
+            input.includes("name")
+        ) {
+            return "My name is Nexora AI. ✦";
+        }
 
 
-            message.innerHTML = `
+        if (
+            input.includes("how are you")
+        ) {
+            return "I'm doing great! 😄 What would you like to do?";
+        }
 
-                <div class="message-avatar">
-                    ${avatar}
-                </div>
 
-                <div class="message-content">
-                    ${escapeHTML(text)}
-                </div>
+        if (
+            input.includes("thank")
+        ) {
+            return "You're welcome! 😊";
+        }
 
+
+        if (
+            input.includes("bye") ||
+            input.includes("goodbye")
+        ) {
+            return "Goodbye! 👋 Come back anytime.";
+        }
+
+
+        if (
+            input.includes("what can you do") ||
+            input.includes("help")
+        ) {
+            return `
+I can help you with:
+
+• 💡 Ideas
+• 🧮 Basic calculations
+• ✍️ Writing
+• 💻 Coding
+• 📚 Simple explanations
+• 🌍 General questions
+
+Try asking me something!
             `;
-
-
-            chatArea.appendChild(
-                message
-            );
-
-
-            chatArea.scrollTop =
-                chatArea.scrollHeight;
-
         }
 
 
-        /* =========================
-           THINKING
-        ========================== */
+        /* BASIC MATH */
 
-        function showThinking() {
-
-            const thinking =
-                document.createElement(
-                    "div"
-                );
-
-
-            thinking.id =
-                "thinking";
-
-
-            thinking.className =
-                "message assistant";
-
-
-            thinking.innerHTML = `
-
-                <div class="message-avatar">
-                    ✦
-                </div>
-
-                <div class="message-content">
-                    Nexora is thinking...
-                </div>
-
-            `;
-
-
-            chatArea.appendChild(
-                thinking
+        const mathExpression =
+            input.match(
+                /^[0-9+\-*/().\s]+$/
             );
 
+        if (mathExpression) {
 
-            chatArea.scrollTop =
-                chatArea.scrollHeight;
+            try {
 
-        }
-
-
-        function removeThinking() {
-
-            const thinking =
-                document.getElementById(
-                    "thinking"
-                );
-
-
-            if (thinking) {
-
-                thinking.remove();
-
-            }
-
-        }
-
-
-        /* =========================
-           SEND MESSAGE
-        ========================== */
-
-        function sendMessage() {
-
-            const text =
-                messageInput.value.trim();
-
-
-            if (!text) {
-
-                return;
-
-            }
-
-
-            welcome.style.display =
-                "none";
-
-
-            addMessage(
-                text,
-                "user"
-            );
-
-
-            messageInput.value =
-                "";
-
-
-            showThinking();
-
-
-            /*
-                Temporary response.
-
-                Real AI API will be
-                connected here later.
-            */
-
-            setTimeout(
-                function() {
-
-                    removeThinking();
-
-
-                    addMessage(
-
-                        "Hello! I'm Nexora. 🚀\n\n" +
-                        "Your chat interface is working. " +
-                        "The real AI model will be connected next.",
-
-                        "assistant"
-
-                    );
-
-                },
-                700
-            );
-
-        }
-
-
-        /* =========================
-           SEND BUTTON
-        ========================== */
-
-        sendButton.addEventListener(
-            "click",
-            sendMessage
-        );
-
-
-        /* =========================
-           ENTER KEY
-        ========================== */
-
-        messageInput.addEventListener(
-            "keydown",
-            function(event) {
+                const result =
+                    Function(
+                        `"use strict"; return (${input})`
+                    )();
 
                 if (
-                    event.key === "Enter" &&
-                    !event.shiftKey
+                    typeof result === "number" &&
+                    Number.isFinite(result)
                 ) {
-
-                    event.preventDefault();
-
-                    sendMessage();
-
+                    return `The answer is ${result}.`;
                 }
 
+            } catch (error) {
+                // Ignore invalid expressions
             }
-        );
+        }
 
 
-        /* =========================
-           SUGGESTIONS
-        ========================== */
-
-        suggestions.forEach(
-            function(button) {
-
-                button.addEventListener(
-                    "click",
-                    function() {
-
-                        const prompt =
-                            button.getAttribute(
-                                "data-prompt"
-                            );
+        if (
+            input.includes("what is ai") ||
+            input.includes("what is artificial intelligence")
+        ) {
+            return `
+Artificial Intelligence (AI) is technology that allows computers
+to perform tasks that normally require human-like intelligence,
+such as understanding language, recognizing patterns, solving
+problems, and making decisions.
+            `;
+        }
 
 
-                        if (!prompt) {
+        if (
+            input.includes("javascript")
+        ) {
+            return `
+JavaScript is a programming language commonly used to make
+websites interactive and dynamic.
 
-                            return;
+For example:
 
-                        }
-
-
-                        messageInput.value =
-                            prompt;
+console.log("Hello, Nexora!");
+            `;
+        }
 
 
-                        messageInput.focus();
+        if (
+            input.includes("html")
+        ) {
+            return `
+HTML is the standard markup language used to structure webpages.
 
-                    }
-                );
+HTML → Structure
+CSS → Design
+JavaScript → Interaction
+            `;
+        }
 
+
+        if (
+            input.includes("css")
+        ) {
+            return `
+CSS is used to style webpages.
+
+It controls things like:
+• Colors
+• Fonts
+• Spacing
+• Layout
+• Animations
+            `;
+        }
+
+
+        if (
+            input.includes("story")
+        ) {
+            return `
+Here's a simple story idea:
+
+A young explorer discovers a mysterious device
+that can predict one event from the future each day.
+But one day, the device predicts something that
+could change everything...
+            `;
+        }
+
+
+        return `
+I'm still learning. 🤖
+
+I don't have a real AI model connected yet,
+but I understood your message:
+
+"${text}"
+
+You can try asking me about AI, coding, math,
+HTML, CSS, JavaScript, or ask for a story.
+        `;
+    }
+
+
+    function showThinking() {
+
+        const thinking =
+            document.createElement("div");
+
+        thinking.id = "thinking";
+
+        thinking.className =
+            "message assistant";
+
+        thinking.innerHTML = `
+            <div class="message-avatar">
+                ✦
+            </div>
+
+            <div class="message-content">
+                Nexora is thinking...
+            </div>
+        `;
+
+        chatArea.appendChild(thinking);
+
+        chatArea.scrollTop =
+            chatArea.scrollHeight;
+    }
+
+
+    function removeThinking() {
+
+        const thinking =
+            document.getElementById("thinking");
+
+        if (thinking) {
+            thinking.remove();
+        }
+    }
+
+
+    function sendMessage() {
+
+        const text =
+            messageInput.value.trim();
+
+        if (!text) return;
+
+        welcome.style.display = "none";
+
+        addMessage(text, "user");
+
+        messageInput.value = "";
+
+        showThinking();
+
+        setTimeout(() => {
+
+            removeThinking();
+
+            const response =
+                getNexoraResponse(text);
+
+            addMessage(
+                response,
+                "assistant"
+            );
+
+        }, 600);
+    }
+
+
+    sendButton.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    messageInput.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Enter" &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
             }
-        );
+
+        }
+    );
 
 
-        /* =========================
-           NEW CHAT
-        ========================== */
+    document
+        .querySelectorAll(".suggestions button")
+        .forEach(button => {
 
-        newChatButton.addEventListener(
-            "click",
-            function() {
+            button.addEventListener(
+                "click",
+                () => {
 
-                chatArea.innerHTML = "";
+                    messageInput.value =
+                        button.dataset.prompt;
 
+                    messageInput.focus();
 
-                chatArea.appendChild(
-                    welcome
-                );
+                }
+            );
 
-
-                welcome.style.display =
-                    "flex";
-
-
-                messageInput.value =
-                    "";
+        });
 
 
-                messageInput.focus();
+    newChatButton.addEventListener(
+        "click",
+        () => {
 
-            }
-        );
+            chatArea.innerHTML = "";
 
-    </script>
+            chatArea.appendChild(welcome);
 
+            welcome.style.display = "flex";
+
+            messageInput.value = "";
+
+            messageInput.focus();
+
+        }
+    );
+</script>
 
 </body>
 
