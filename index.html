@@ -1,1 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nexora AII</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="logo">
+                    ✦
+                </div>
+
+                <div class="brand-text">
+                    <h1>My AI</h1>
+                    <span>AI Assistant</span>
+                </div>
+
+            </div>
+
+            <button
+                class="new-chat"
+                id="newChat"
+            >
+                ＋ New Chat
+            </button>
+
+        </header>
+
+
+        <!-- CHAT AREA -->
+        <main
+            class="chat-area"
+            id="chatArea"
+        >
+
+            <!-- WELCOME SCREEN -->
+            <section
+                class="welcome"
+                id="welcome"
+            >
+
+                <div class="welcome-logo">
+                    ✦
+                </div>
+
+                <h2>
+                    How can I help you?
+                </h2>
+
+                <p>
+                    Ask me anything, solve problems,
+                    write, code, or explore ideas.
+                </p>
+
+
+                <!-- SUGGESTIONS -->
+                <div class="suggestions">
+
+                    <button
+                        data-prompt="Explain artificial intelligence simply"
+                    >
+                        🧠
+                        <span>Explain AI</span>
+                    </button>
+
+
+                    <button
+                        data-prompt="Give me a creative story idea"
+                    >
+                        ✍️
+                        <span>Creative Writing</span>
+                    </button>
+
+
+                    <button
+                        data-prompt="Help me write a JavaScript program"
+                    >
+                        💻
+                        <span>Coding Help</span>
+                    </button>
+
+
+                    <button
+                        data-prompt="Solve 25 × 48 step by step"
+                    >
+                        🔢
+                        <span>Solve Math</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- INPUT AREA -->
+        <div class="input-section">
+
+            <div class="input-box">
+
+                <button
+                    class="attach-button"
+                    id="attachButton"
+                    title="Attach file"
+                >
+                    ＋
+                </button>
+
+
+                <textarea
+                    id="messageInput"
+                    placeholder="Message My AI..."
+                    rows="1"
+                ></textarea>
+
+
+                <button
+                    class="send-button"
+                    id="sendButton"
+                    title="Send"
+                >
+                    ↑
+                </button>
+
+            </div>
+
+
+            <div class="input-footer">
+
+                <span>
+                    My AI can make mistakes.
+                    Check important information.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
