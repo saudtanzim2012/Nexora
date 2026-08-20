@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,19 +10,714 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Nexora AII</title>
+    <title>Nexora AI</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        :root {
+
+            --background: #f7f8fc;
+            --surface: #ffffff;
+
+            --text: #171923;
+            --muted: #737783;
+
+            --border: #e3e5ec;
+
+            --primary: #171923;
+
+            --hover: #f0f1f5;
+
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+        }
+
+
+        /* =========================
+           APP
+        ========================= */
+
+        .app {
+
+            height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            height: 70px;
+
+            padding: 0 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: var(--surface);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .logo {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 22px;
+
+        }
+
+
+        .brand-text h1 {
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+        }
+
+
+        .brand-text span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================
+           NEW CHAT
+        ========================= */
+
+        .new-chat {
+
+            padding: 9px 15px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .new-chat:hover {
+
+            background: var(--hover);
+
+        }
+
+
+        /* =========================
+           CHAT AREA
+        ========================= */
+
+        .chat-area {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 30px 20px;
+
+        }
+
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+
+            min-height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+        }
+
+
+        .welcome-logo {
+
+            width: 66px;
+            height: 66px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .welcome h2 {
+
+            font-size: 31px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .welcome p {
+
+            max-width: 560px;
+
+            color: var(--muted);
+
+            line-height: 1.6;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================
+           SUGGESTIONS
+        ========================= */
+
+        .suggestions {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .suggestions button {
+
+            min-height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 14px 16px;
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 13px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            color: var(--text);
+
+            transition: 0.2s;
+
+        }
+
+
+        .suggestions button:hover {
+
+            background: var(--hover);
+
+            border-color: #cfd2dc;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .message {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            margin:
+                0 auto 25px;
+
+            display: flex;
+
+            gap: 12px;
+
+        }
+
+
+        .message-avatar {
+
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 15px;
+
+        }
+
+
+        .message.user
+        .message-avatar {
+
+            background: #e7e8ee;
+
+            color: #333;
+
+        }
+
+
+        .message-content {
+
+            padding-top: 6px;
+
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =========================
+           INPUT AREA
+        ========================= */
+
+        .input-section {
+
+            padding:
+                12px 20px 18px;
+
+            background:
+                var(--background);
+
+        }
+
+
+        .input-box {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 8px;
+
+            padding: 8px;
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.04);
+
+        }
+
+
+        textarea {
+
+            flex: 1;
+
+            min-height: 42px;
+
+            max-height: 150px;
+
+            resize: none;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            padding:
+                11px 4px;
+
+            font-size: 15px;
+
+            line-height: 20px;
+
+            color: var(--text);
+
+        }
+
+
+        textarea::placeholder {
+
+            color: #999da7;
+
+        }
+
+
+        /* =========================
+           ATTACH
+        ========================= */
+
+        .attach-button {
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #70737d;
+
+            border-radius: 11px;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+        }
+
+
+        .attach-button:hover {
+
+            background: var(--hover);
+
+        }
+
+
+        /* =========================
+           SEND
+        ========================= */
+
+        .send-button {
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .send-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            background: #000;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .input-footer {
+
+            text-align: center;
+
+            margin-top: 8px;
+
+            color: #999da7;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================
+           SCROLLBAR
+        ========================= */
+
+        .chat-area::-webkit-scrollbar {
+
+            width: 7px;
+
+        }
+
+
+        .chat-area::-webkit-scrollbar-thumb {
+
+            background: #d5d7df;
+
+            border-radius: 10px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .header {
+
+                height: 62px;
+
+                padding: 0 13px;
+
+            }
+
+
+            .logo {
+
+                width: 38px;
+                height: 38px;
+
+                border-radius: 11px;
+
+            }
+
+
+            .brand-text h1 {
+
+                font-size: 16px;
+
+            }
+
+
+            .brand-text span {
+
+                font-size: 10px;
+
+            }
+
+
+            .new-chat {
+
+                padding:
+                    8px 10px;
+
+                font-size: 12px;
+
+            }
+
+
+            .chat-area {
+
+                padding:
+                    20px 12px;
+
+            }
+
+
+            .welcome-logo {
+
+                width: 55px;
+                height: 55px;
+
+                border-radius: 17px;
+
+                font-size: 25px;
+
+            }
+
+
+            .welcome h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            .welcome p {
+
+                font-size: 14px;
+
+            }
+
+
+            .suggestions {
+
+                grid-template-columns: 1fr;
+
+                margin-top: 24px;
+
+            }
+
+
+            .input-section {
+
+                padding:
+                    8px 10px 12px;
+
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .welcome h2 {
+
+                font-size: 22px;
+
+            }
+
+
+            .welcome p {
+
+                font-size: 13px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
     <div class="app">
 
-        <!-- HEADER -->
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
         <header class="header">
 
             <div class="brand">
@@ -31,11 +727,19 @@
                 </div>
 
                 <div class="brand-text">
-                    <h1>My AI</h1>
-                    <span>AI Assistant</span>
+
+                    <h1>
+                        Nexora AI
+                    </h1>
+
+                    <span>
+                        AI Assistant
+                    </span>
+
                 </div>
 
             </div>
+
 
             <button
                 class="new-chat"
@@ -47,13 +751,16 @@
         </header>
 
 
-        <!-- CHAT AREA -->
+        <!-- =========================
+             CHAT
+        ========================== -->
+
         <main
             class="chat-area"
             id="chatArea"
         >
 
-            <!-- WELCOME SCREEN -->
+
             <section
                 class="welcome"
                 id="welcome"
@@ -63,61 +770,91 @@
                     ✦
                 </div>
 
+
                 <h2>
                     How can I help you?
                 </h2>
 
+
                 <p>
-                    Ask me anything, solve problems,
+                    Ask Nexora anything, solve problems,
                     write, code, or explore ideas.
                 </p>
 
 
-                <!-- SUGGESTIONS -->
                 <div class="suggestions">
+
 
                     <button
                         data-prompt="Explain artificial intelligence simply"
                     >
+
                         🧠
-                        <span>Explain AI</span>
+
+                        <span>
+                            Explain AI
+                        </span>
+
                     </button>
 
 
                     <button
                         data-prompt="Give me a creative story idea"
                     >
+
                         ✍️
-                        <span>Creative Writing</span>
+
+                        <span>
+                            Creative Writing
+                        </span>
+
                     </button>
 
 
                     <button
                         data-prompt="Help me write a JavaScript program"
                     >
+
                         💻
-                        <span>Coding Help</span>
+
+                        <span>
+                            Coding Help
+                        </span>
+
                     </button>
 
 
                     <button
                         data-prompt="Solve 25 × 48 step by step"
                     >
+
                         🔢
-                        <span>Solve Math</span>
+
+                        <span>
+                            Solve Math
+                        </span>
+
                     </button>
+
 
                 </div>
 
+
             </section>
+
 
         </main>
 
 
-        <!-- INPUT AREA -->
+        <!-- =========================
+             INPUT
+        ========================== -->
+
         <div class="input-section">
 
+
             <div class="input-box">
+
 
                 <button
                     class="attach-button"
@@ -130,7 +867,7 @@
 
                 <textarea
                     id="messageInput"
-                    placeholder="Message My AI..."
+                    placeholder="Message Nexora..."
                     rows="1"
                 ></textarea>
 
@@ -143,24 +880,359 @@
                     ↑
                 </button>
 
+
             </div>
 
 
             <div class="input-footer">
 
-                <span>
-                    My AI can make mistakes.
-                    Check important information.
-                </span>
+                Nexora can make mistakes.
+                Check important information.
 
             </div>
 
+
         </div>
+
 
     </div>
 
 
-    <script src="script.js"></script>
+    <script>
+
+        /* =========================
+           ELEMENTS
+        ========================== */
+
+        const chatArea =
+            document.getElementById(
+                "chatArea"
+            );
+
+
+        const messageInput =
+            document.getElementById(
+                "messageInput"
+            );
+
+
+        const sendButton =
+            document.getElementById(
+                "sendButton"
+            );
+
+
+        const newChatButton =
+            document.getElementById(
+                "newChat"
+            );
+
+
+        const welcome =
+            document.getElementById(
+                "welcome"
+            );
+
+
+        const suggestions =
+            document.querySelectorAll(
+                ".suggestions button"
+            );
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================== */
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =========================
+           ADD MESSAGE
+        ========================== */
+
+        function addMessage(
+            text,
+            type
+        ) {
+
+            const message =
+                document.createElement(
+                    "div"
+                );
+
+
+            message.className =
+                "message " + type;
+
+
+            const avatar =
+                type === "user"
+                    ? "👤"
+                    : "✦";
+
+
+            message.innerHTML = `
+
+                <div class="message-avatar">
+                    ${avatar}
+                </div>
+
+                <div class="message-content">
+                    ${escapeHTML(text)}
+                </div>
+
+            `;
+
+
+            chatArea.appendChild(
+                message
+            );
+
+
+            chatArea.scrollTop =
+                chatArea.scrollHeight;
+
+        }
+
+
+        /* =========================
+           THINKING
+        ========================== */
+
+        function showThinking() {
+
+            const thinking =
+                document.createElement(
+                    "div"
+                );
+
+
+            thinking.id =
+                "thinking";
+
+
+            thinking.className =
+                "message assistant";
+
+
+            thinking.innerHTML = `
+
+                <div class="message-avatar">
+                    ✦
+                </div>
+
+                <div class="message-content">
+                    Nexora is thinking...
+                </div>
+
+            `;
+
+
+            chatArea.appendChild(
+                thinking
+            );
+
+
+            chatArea.scrollTop =
+                chatArea.scrollHeight;
+
+        }
+
+
+        function removeThinking() {
+
+            const thinking =
+                document.getElementById(
+                    "thinking"
+                );
+
+
+            if (thinking) {
+
+                thinking.remove();
+
+            }
+
+        }
+
+
+        /* =========================
+           SEND MESSAGE
+        ========================== */
+
+        function sendMessage() {
+
+            const text =
+                messageInput.value.trim();
+
+
+            if (!text) {
+
+                return;
+
+            }
+
+
+            welcome.style.display =
+                "none";
+
+
+            addMessage(
+                text,
+                "user"
+            );
+
+
+            messageInput.value =
+                "";
+
+
+            showThinking();
+
+
+            /*
+                Temporary response.
+
+                Real AI API will be
+                connected here later.
+            */
+
+            setTimeout(
+                function() {
+
+                    removeThinking();
+
+
+                    addMessage(
+
+                        "Hello! I'm Nexora. 🚀\n\n" +
+                        "Your chat interface is working. " +
+                        "The real AI model will be connected next.",
+
+                        "assistant"
+
+                    );
+
+                },
+                700
+            );
+
+        }
+
+
+        /* =========================
+           SEND BUTTON
+        ========================== */
+
+        sendButton.addEventListener(
+            "click",
+            sendMessage
+        );
+
+
+        /* =========================
+           ENTER KEY
+        ========================== */
+
+        messageInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           SUGGESTIONS
+        ========================== */
+
+        suggestions.forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const prompt =
+                            button.getAttribute(
+                                "data-prompt"
+                            );
+
+
+                        if (!prompt) {
+
+                            return;
+
+                        }
+
+
+                        messageInput.value =
+                            prompt;
+
+
+                        messageInput.focus();
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =========================
+           NEW CHAT
+        ========================== */
+
+        newChatButton.addEventListener(
+            "click",
+            function() {
+
+                chatArea.innerHTML = "";
+
+
+                chatArea.appendChild(
+                    welcome
+                );
+
+
+                welcome.style.display =
+                    "flex";
+
+
+                messageInput.value =
+                    "";
+
+
+                messageInput.focus();
+
+            }
+        );
+
+    </script>
+
 
 </body>
 
