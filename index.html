@@ -14,1237 +14,863 @@
 
     <style>
 
-        /* =========================
-           RESET
-        ========================= */
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-
         :root {
-
             --background: #f7f8fc;
             --surface: #ffffff;
-
             --text: #171923;
             --muted: #737783;
-
             --border: #e3e5ec;
-
             --primary: #171923;
-
             --hover: #f0f1f5;
-
         }
-
 
         body {
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
+            font-family: Arial, Helvetica, sans-serif;
             background: var(--background);
-
             color: var(--text);
-
         }
-
-
-        /* =========================
-           APP
-        ========================= */
 
         .app {
-
             height: 100vh;
-
             display: flex;
-
             flex-direction: column;
-
         }
-
-
-        /* =========================
-           HEADER
-        ========================= */
 
         .header {
-
             height: 70px;
-
             padding: 0 24px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             background: var(--surface);
-
-            border-bottom:
-                1px solid var(--border);
-
+            border-bottom: 1px solid var(--border);
         }
-
 
         .brand {
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
         }
-
 
         .logo {
-
             width: 42px;
             height: 42px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border-radius: 13px;
-
             background: var(--primary);
-
             color: white;
-
             font-size: 22px;
-
         }
-
 
         .brand-text h1 {
-
             font-size: 19px;
-
             font-weight: 700;
-
         }
-
 
         .brand-text span {
-
             display: block;
-
             margin-top: 2px;
-
             color: var(--muted);
-
             font-size: 12px;
-
         }
-
-
-        /* =========================
-           NEW CHAT
-        ========================= */
 
         .new-chat {
-
             padding: 9px 15px;
-
-            border:
-                1px solid var(--border);
-
+            border: 1px solid var(--border);
             border-radius: 10px;
-
             background: white;
-
             color: var(--text);
-
             cursor: pointer;
-
-            transition: 0.2s;
-
+            transition: .2s;
         }
-
 
         .new-chat:hover {
-
             background: var(--hover);
-
         }
-
-
-        /* =========================
-           CHAT AREA
-        ========================= */
 
         .chat-area {
-
             flex: 1;
-
             overflow-y: auto;
-
             padding: 30px 20px;
-
         }
-
-
-        /* =========================
-           WELCOME
-        ========================= */
 
         .welcome {
-
             min-height: 100%;
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
-
         }
-
 
         .welcome-logo {
-
             width: 66px;
             height: 66px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border-radius: 20px;
-
             background: var(--primary);
-
             color: white;
-
             font-size: 30px;
-
             margin-bottom: 20px;
-
         }
-
 
         .welcome h2 {
-
             font-size: 31px;
-
             margin-bottom: 10px;
-
         }
-
 
         .welcome p {
-
             max-width: 560px;
-
             color: var(--muted);
-
             line-height: 1.6;
-
             font-size: 15px;
-
         }
-
-
-        /* =========================
-           SUGGESTIONS
-        ========================= */
 
         .suggestions {
-
             width: 100%;
-
             max-width: 650px;
-
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-
             margin-top: 30px;
-
         }
-
 
         .suggestions button {
-
             min-height: 58px;
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
             padding: 14px 16px;
-
             background: white;
-
-            border:
-                1px solid var(--border);
-
+            border: 1px solid var(--border);
             border-radius: 13px;
-
             cursor: pointer;
-
             text-align: left;
-
             color: var(--text);
-
-            transition: 0.2s;
-
+            transition: .2s;
         }
-
 
         .suggestions button:hover {
-
             background: var(--hover);
-
             border-color: #cfd2dc;
-
-            transform:
-                translateY(-1px);
-
+            transform: translateY(-1px);
         }
-
-
-        /* =========================
-           MESSAGES
-        ========================= */
 
         .message {
-
             width: 100%;
-
             max-width: 850px;
-
-            margin:
-                0 auto 25px;
-
+            margin: 0 auto 25px;
             display: flex;
-
             gap: 12px;
-
         }
 
-
         .message-avatar {
-
             width: 36px;
             height: 36px;
-
             flex-shrink: 0;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border-radius: 11px;
-
             background: var(--primary);
-
             color: white;
-
             font-size: 15px;
-
         }
 
-
-        .message.user
-        .message-avatar {
-
+        .message.user .message-avatar {
             background: #e7e8ee;
-
             color: #333;
-
         }
-
 
         .message-content {
-
             padding-top: 6px;
-
             line-height: 1.7;
-
             white-space: pre-wrap;
-
             word-break: break-word;
-
         }
-
-
-        /* =========================
-           INPUT AREA
-        ========================= */
 
         .input-section {
-
-            padding:
-                12px 20px 18px;
-
-            background:
-                var(--background);
-
+            padding: 12px 20px 18px;
+            background: var(--background);
         }
-
 
         .input-box {
-
             width: 100%;
-
             max-width: 850px;
-
             margin: auto;
-
             display: flex;
-
             align-items: flex-end;
-
             gap: 8px;
-
             padding: 8px;
-
             background: white;
-
-            border:
-                1px solid var(--border);
-
+            border: 1px solid var(--border);
             border-radius: 18px;
-
-            box-shadow:
-                0 5px 20px
-                rgba(0, 0, 0, 0.04);
-
+            box-shadow: 0 5px 20px rgba(0,0,0,.04);
         }
-
 
         textarea {
-
             flex: 1;
-
             min-height: 42px;
-
             max-height: 150px;
-
             resize: none;
-
             border: none;
-
             outline: none;
-
             background: transparent;
-
-            padding:
-                11px 4px;
-
+            padding: 11px 4px;
             font-size: 15px;
-
             line-height: 20px;
-
             color: var(--text);
-
         }
-
 
         textarea::placeholder {
-
             color: #999da7;
-
         }
-
-
-        /* =========================
-           ATTACH
-        ========================= */
 
         .attach-button {
-
             width: 40px;
             height: 40px;
-
             border: none;
-
             background: transparent;
-
             color: #70737d;
-
             border-radius: 11px;
-
             font-size: 23px;
-
             cursor: pointer;
-
         }
-
 
         .attach-button:hover {
-
             background: var(--hover);
-
         }
-
-
-        /* =========================
-           SEND
-        ========================= */
 
         .send-button {
-
             width: 40px;
             height: 40px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border: none;
-
             border-radius: 12px;
-
             background: var(--primary);
-
             color: white;
-
             font-size: 22px;
-
             cursor: pointer;
-
-            transition: 0.2s;
-
+            transition: .2s;
         }
-
 
         .send-button:hover {
-
-            transform:
-                translateY(-1px);
-
+            transform: translateY(-1px);
             background: #000;
-
         }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
+        .send-button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none;
+        }
 
         .input-footer {
-
             text-align: center;
-
             margin-top: 8px;
-
             color: #999da7;
-
             font-size: 11px;
-
         }
 
+        .thinking-dots {
+            display: flex;
+            gap: 4px;
+            padding-top: 10px;
+        }
 
-        /* =========================
-           SCROLLBAR
-        ========================= */
+        .thinking-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #777;
+            animation: bounce 1.2s infinite;
+        }
+
+        .thinking-dots span:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+        .thinking-dots span:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+        @keyframes bounce {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-5px);
+            }
+        }
 
         .chat-area::-webkit-scrollbar {
-
             width: 7px;
-
         }
-
 
         .chat-area::-webkit-scrollbar-thumb {
-
             background: #d5d7df;
-
             border-radius: 10px;
-
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 650px) {
 
             .header {
-
                 height: 62px;
-
                 padding: 0 13px;
-
             }
-
 
             .logo {
-
                 width: 38px;
                 height: 38px;
-
                 border-radius: 11px;
-
             }
-
 
             .brand-text h1 {
-
                 font-size: 16px;
-
             }
-
 
             .brand-text span {
-
                 font-size: 10px;
-
             }
-
 
             .new-chat {
-
-                padding:
-                    8px 10px;
-
+                padding: 8px 10px;
                 font-size: 12px;
-
             }
-
 
             .chat-area {
-
-                padding:
-                    20px 12px;
-
+                padding: 20px 12px;
             }
-
 
             .welcome-logo {
-
                 width: 55px;
                 height: 55px;
-
                 border-radius: 17px;
-
                 font-size: 25px;
-
             }
-
 
             .welcome h2 {
-
                 font-size: 25px;
-
             }
-
 
             .welcome p {
-
                 font-size: 14px;
-
             }
-
 
             .suggestions {
-
                 grid-template-columns: 1fr;
-
                 margin-top: 24px;
-
             }
-
 
             .input-section {
-
-                padding:
-                    8px 10px 12px;
-
+                padding: 8px 10px 12px;
             }
-
         }
-
 
         @media (max-width: 400px) {
 
             .welcome h2 {
-
                 font-size: 22px;
-
             }
-
 
             .welcome p {
-
                 font-size: 13px;
-
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-    <div class="app">
+    <header class="header">
 
+        <div class="brand">
 
-        <!-- =========================
-             HEADER
-        ========================== -->
-
-        <header class="header">
-
-            <div class="brand">
-
-                <div class="logo">
-                    ✦
-                </div>
-
-                <div class="brand-text">
-
-                    <h1>
-                        Nexora AI
-                    </h1>
-
-                    <span>
-                        AI Assistant
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="new-chat"
-                id="newChat"
-            >
-                ＋ New Chat
-            </button>
-
-        </header>
-
-
-        <!-- =========================
-             CHAT
-        ========================== -->
-
-        <main
-            class="chat-area"
-            id="chatArea"
-        >
-
-
-            <section
-                class="welcome"
-                id="welcome"
-            >
-
-                <div class="welcome-logo">
-                    ✦
-                </div>
-
-
-                <h2>
-                    How can I help you?
-                </h2>
-
-
-                <p>
-                    Ask Nexora anything, solve problems,
-                    write, code, or explore ideas.
-                </p>
-
-
-                <div class="suggestions">
-
-
-                    <button
-                        data-prompt="Explain artificial intelligence simply"
-                    >
-
-                        🧠
-
-                        <span>
-                            Explain AI
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        data-prompt="Give me a creative story idea"
-                    >
-
-                        ✍️
-
-                        <span>
-                            Creative Writing
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        data-prompt="Help me write a JavaScript program"
-                    >
-
-                        💻
-
-                        <span>
-                            Coding Help
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        data-prompt="Solve 25 × 48 step by step"
-                    >
-
-                        🔢
-
-                        <span>
-                            Solve Math
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-
-            </section>
-
-
-        </main>
-
-
-        <!-- =========================
-             INPUT
-        ========================== -->
-
-        <div class="input-section">
-
-
-            <div class="input-box">
-
-
-                <button
-                    class="attach-button"
-                    id="attachButton"
-                    title="Attach file"
-                >
-                    ＋
-                </button>
-
-
-                <textarea
-                    id="messageInput"
-                    placeholder="Message Nexora..."
-                    rows="1"
-                ></textarea>
-
-
-                <button
-                    class="send-button"
-                    id="sendButton"
-                    title="Send"
-                >
-                    ↑
-                </button>
-
-
-            </div>
-
-
-            <div class="input-footer">
-
-                Nexora can make mistakes.
-                Check important information.
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-   <script>
-    const chatArea = document.getElementById("chatArea");
-    const messageInput = document.getElementById("messageInput");
-    const sendButton = document.getElementById("sendButton");
-    const newChatButton = document.getElementById("newChat");
-    const welcome = document.getElementById("welcome");
-
-    function escapeHTML(text) {
-        const div = document.createElement("div");
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function addMessage(text, type) {
-
-        const message = document.createElement("div");
-
-        message.className = `message ${type}`;
-
-        message.innerHTML = `
-            <div class="message-avatar">
-                ${type === "user" ? "👤" : "✦"}
-            </div>
-
-            <div class="message-content">
-                ${escapeHTML(text)}
-            </div>
-        `;
-
-        chatArea.appendChild(message);
-
-        chatArea.scrollTop = chatArea.scrollHeight;
-    }
-
-
-    function getNexoraResponse(text) {
-
-        const input = text.toLowerCase().trim();
-
-
-        if (
-            input.includes("hello") ||
-            input.includes("hi") ||
-            input.includes("hey")
-        ) {
-            return "Hello! 👋 I'm Nexora. How can I help you?";
-        }
-
-
-        if (
-            input.includes("who are you") ||
-            input.includes("what are you")
-        ) {
-            return "I'm Nexora, your AI-style digital assistant. 🚀";
-        }
-
-
-        if (
-            input.includes("your name") ||
-            input.includes("name")
-        ) {
-            return "My name is Nexora AI. ✦";
-        }
-
-
-        if (
-            input.includes("how are you")
-        ) {
-            return "I'm doing great! 😄 What would you like to do?";
-        }
-
-
-        if (
-            input.includes("thank")
-        ) {
-            return "You're welcome! 😊";
-        }
-
-
-        if (
-            input.includes("bye") ||
-            input.includes("goodbye")
-        ) {
-            return "Goodbye! 👋 Come back anytime.";
-        }
-
-
-        if (
-            input.includes("what can you do") ||
-            input.includes("help")
-        ) {
-            return `
-I can help you with:
-
-• 💡 Ideas
-• 🧮 Basic calculations
-• ✍️ Writing
-• 💻 Coding
-• 📚 Simple explanations
-• 🌍 General questions
-
-Try asking me something!
-            `;
-        }
-
-
-        /* BASIC MATH */
-
-        const mathExpression =
-            input.match(
-                /^[0-9+\-*/().\s]+$/
-            );
-
-        if (mathExpression) {
-
-            try {
-
-                const result =
-                    Function(
-                        `"use strict"; return (${input})`
-                    )();
-
-                if (
-                    typeof result === "number" &&
-                    Number.isFinite(result)
-                ) {
-                    return `The answer is ${result}.`;
-                }
-
-            } catch (error) {
-                // Ignore invalid expressions
-            }
-        }
-
-
-        if (
-            input.includes("what is ai") ||
-            input.includes("what is artificial intelligence")
-        ) {
-            return `
-Artificial Intelligence (AI) is technology that allows computers
-to perform tasks that normally require human-like intelligence,
-such as understanding language, recognizing patterns, solving
-problems, and making decisions.
-            `;
-        }
-
-
-        if (
-            input.includes("javascript")
-        ) {
-            return `
-JavaScript is a programming language commonly used to make
-websites interactive and dynamic.
-
-For example:
-
-console.log("Hello, Nexora!");
-            `;
-        }
-
-
-        if (
-            input.includes("html")
-        ) {
-            return `
-HTML is the standard markup language used to structure webpages.
-
-HTML → Structure
-CSS → Design
-JavaScript → Interaction
-            `;
-        }
-
-
-        if (
-            input.includes("css")
-        ) {
-            return `
-CSS is used to style webpages.
-
-It controls things like:
-• Colors
-• Fonts
-• Spacing
-• Layout
-• Animations
-            `;
-        }
-
-
-        if (
-            input.includes("story")
-        ) {
-            return `
-Here's a simple story idea:
-
-A young explorer discovers a mysterious device
-that can predict one event from the future each day.
-But one day, the device predicts something that
-could change everything...
-            `;
-        }
-
-
-        return `
-I'm still learning. 🤖
-
-I don't have a real AI model connected yet,
-but I understood your message:
-
-"${text}"
-
-You can try asking me about AI, coding, math,
-HTML, CSS, JavaScript, or ask for a story.
-        `;
-    }
-
-
-    function showThinking() {
-
-        const thinking =
-            document.createElement("div");
-
-        thinking.id = "thinking";
-
-        thinking.className =
-            "message assistant";
-
-        thinking.innerHTML = `
-            <div class="message-avatar">
+            <div class="logo">
                 ✦
             </div>
 
-            <div class="message-content">
-                Nexora is thinking...
+            <div class="brand-text">
+
+                <h1>Nexora AI</h1>
+
+                <span>AI Assistant</span>
+
             </div>
-        `;
 
-        chatArea.appendChild(thinking);
+        </div>
 
-        chatArea.scrollTop =
-            chatArea.scrollHeight;
+        <button
+            class="new-chat"
+            id="newChat"
+        >
+            ＋ New Chat
+        </button>
+
+    </header>
+
+
+    <main
+        class="chat-area"
+        id="chatArea"
+    >
+
+        <section
+            class="welcome"
+            id="welcome"
+        >
+
+            <div class="welcome-logo">
+                ✦
+            </div>
+
+            <h2>
+                How can I help you?
+            </h2>
+
+            <p>
+                Ask Nexora anything, solve problems,
+                write, code, or explore ideas.
+            </p>
+
+            <div class="suggestions">
+
+                <button data-prompt="Explain artificial intelligence simply">
+                    🧠
+                    <span>Explain AI</span>
+                </button>
+
+                <button data-prompt="Give me a creative story idea">
+                    ✍️
+                    <span>Creative Writing</span>
+                </button>
+
+                <button data-prompt="Help me write a JavaScript program">
+                    💻
+                    <span>Coding Help</span>
+                </button>
+
+                <button data-prompt="Solve 25 × 48 step by step">
+                    🔢
+                    <span>Solve Math</span>
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <div class="input-section">
+
+        <div class="input-box">
+
+            <button
+                class="attach-button"
+                id="attachButton"
+                title="Attach file"
+            >
+                ＋
+            </button>
+
+            <textarea
+                id="messageInput"
+                placeholder="Message Nexora..."
+                rows="1"
+            ></textarea>
+
+            <button
+                class="send-button"
+                id="sendButton"
+                title="Send"
+            >
+                ↑
+            </button>
+
+        </div>
+
+        <div class="input-footer">
+            Nexora can make mistakes. Check important information.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GEMINI API KEY
+   ========================================================= */
+
+const GEMINI_API_KEY = "PASTE_YOUR_GEMINI_API_KEY_HERE";
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const chatArea =
+    document.getElementById("chatArea");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const newChatButton =
+    document.getElementById("newChat");
+
+const welcome =
+    document.getElementById("welcome");
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+   ========================================================= */
+
+function addMessage(text, type) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        `message ${type}`;
+
+    message.innerHTML = `
+
+        <div class="message-avatar">
+            ${type === "user" ? "👤" : "✦"}
+        </div>
+
+        <div class="message-content">
+            ${escapeHTML(text)}
+        </div>
+
+    `;
+
+    chatArea.appendChild(message);
+
+    chatArea.scrollTop =
+        chatArea.scrollHeight;
+}
+
+
+/* =========================================================
+   THINKING
+   ========================================================= */
+
+function showThinking() {
+
+    const thinking =
+        document.createElement("div");
+
+    thinking.id =
+        "thinking";
+
+    thinking.className =
+        "message assistant";
+
+    thinking.innerHTML = `
+
+        <div class="message-avatar">
+            ✦
+        </div>
+
+        <div class="message-content">
+
+            <div class="thinking-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    `;
+
+    chatArea.appendChild(thinking);
+
+    chatArea.scrollTop =
+        chatArea.scrollHeight;
+}
+
+
+function removeThinking() {
+
+    const thinking =
+        document.getElementById("thinking");
+
+    if (thinking) {
+        thinking.remove();
     }
+}
 
 
-    function removeThinking() {
+/* =========================================================
+   GEMINI
+   ========================================================= */
 
-        const thinking =
-            document.getElementById("thinking");
+async function askNexora(message) {
 
-        if (thinking) {
-            thinking.remove();
-        }
-    }
+    const url =
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
+        + encodeURIComponent(GEMINI_API_KEY);
 
+    const response =
+        await fetch(url, {
 
-    function sendMessage() {
+            method: "POST",
 
-        const text =
-            messageInput.value.trim();
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-        if (!text) return;
+            body: JSON.stringify({
 
-        welcome.style.display = "none";
+                contents: [
 
-        addMessage(text, "user");
+                    {
+                        role: "user",
 
-        messageInput.value = "";
+                        parts: [
+                            {
+                                text:
+                                    "You are Nexora AI, a helpful, friendly and intelligent AI assistant. Give clear and useful answers. " +
+                                    message
+                            }
+                        ]
+                    }
 
-        showThinking();
+                ]
 
-        setTimeout(() => {
-
-            removeThinking();
-
-            const response =
-                getNexoraResponse(text);
-
-            addMessage(
-                response,
-                "assistant"
-            );
-
-        }, 600);
-    }
-
-
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
-
-
-    messageInput.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (
-                event.key === "Enter" &&
-                !event.shiftKey
-            ) {
-
-                event.preventDefault();
-
-                sendMessage();
-            }
-
-        }
-    );
-
-
-    document
-        .querySelectorAll(".suggestions button")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    messageInput.value =
-                        button.dataset.prompt;
-
-                    messageInput.focus();
-
-                }
-            );
+            })
 
         });
 
 
-    newChatButton.addEventListener(
-        "click",
-        () => {
+    const data =
+        await response.json();
 
-            chatArea.innerHTML = "";
 
-            chatArea.appendChild(welcome);
+    if (!response.ok) {
 
-            welcome.style.display = "flex";
+        console.error(data);
 
-            messageInput.value = "";
+        throw new Error(
+            data?.error?.message ||
+            "Gemini API request failed."
+        );
 
-            messageInput.focus();
+    }
 
-        }
+
+    const reply =
+        data?.candidates?.[0]?.content?.parts
+            ?.map(part => part.text || "")
+            .join("")
+            .trim();
+
+
+    if (!reply) {
+
+        throw new Error(
+            "Nexora did not receive a response."
+        );
+
+    }
+
+
+    return reply;
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+   ========================================================= */
+
+async function sendMessage() {
+
+    const text =
+        messageInput.value.trim();
+
+    if (!text) return;
+
+
+    if (
+        GEMINI_API_KEY ===
+        "PASTE_YOUR_GEMINI_API_KEY_HERE"
+    ) {
+
+        alert(
+            "আগে code-এর GEMINI_API_KEY জায়গায় তোমার API key বসাও।"
+        );
+
+        return;
+    }
+
+
+    welcome.style.display =
+        "none";
+
+    addMessage(
+        text,
+        "user"
     );
+
+    messageInput.value = "";
+
+    sendButton.disabled = true;
+
+    showThinking();
+
+
+    try {
+
+        const response =
+            await askNexora(text);
+
+        removeThinking();
+
+        addMessage(
+            response,
+            "assistant"
+        );
+
+    } catch (error) {
+
+        removeThinking();
+
+        addMessage(
+            "দুঃখিত, Nexora এখন response দিতে পারছে না.\n\nError: "
+            + error.message,
+            "assistant"
+        );
+
+    }
+
+
+    sendButton.disabled =
+        false;
+
+    messageInput.focus();
+}
+
+
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+/* =========================================================
+   ENTER
+   ========================================================= */
+
+messageInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            sendMessage();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SUGGESTIONS
+   ========================================================= */
+
+document
+    .querySelectorAll(".suggestions button")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                messageInput.value =
+                    button.dataset.prompt;
+
+                messageInput.focus();
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   NEW CHAT
+   ========================================================= */
+
+newChatButton.addEventListener(
+    "click",
+    () => {
+
+        chatArea.innerHTML = "";
+
+        chatArea.appendChild(
+            welcome
+        );
+
+        welcome.style.display =
+            "flex";
+
+        messageInput.value = "";
+
+        messageInput.focus();
+
+    }
+);
+
 </script>
 
 </body>
