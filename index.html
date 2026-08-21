@@ -591,6 +591,43 @@ function addMessage(text, type) {
 }
 
 
+async function typeMessage(text) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message assistant";
+
+    message.innerHTML = `
+        <div class="message-avatar">
+            ✦
+        </div>
+
+        <div class="message-content"></div>
+    `;
+
+    chatArea.appendChild(message);
+
+    const content =
+        message.querySelector(".message-content");
+
+    for (let i = 0; i < text.length; i++) {
+
+        content.textContent += text[i];
+
+        chatArea.scrollTop =
+            chatArea.scrollHeight;
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 12)
+        );
+
+    }
+}
+
+
+    
 /* =========================================================
    THINKING
    ========================================================= */
@@ -646,47 +683,48 @@ function removeThinking() {
    GEMINI
    ========================================================= */
 
+let conversationHistory = [];
+    
 async function askNexora(message) {
+
+    conversationHistory.push({
+        role: "user",
+        parts: [
+            {
+                text: message
+            }
+        ]
+    });
 
     const url =
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
         + encodeURIComponent(GEMINI_API_KEY);
 
-    const response =
-        await fetch(url, {
+    const response = await fetch(url, {
 
-            method: "POST",
+        method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            systemInstruction: {
+                parts: [
+                    {
+                        text: "You are Nexora AI, a helpful, friendly and intelligent AI assistant. Remember the conversation context and use previous messages when answering."
+                    }
+                ]
             },
 
-            body: JSON.stringify({
+            contents: conversationHistory
 
-                contents: [
+        })
 
-                    {
-                        role: "user",
+    });
 
-                        parts: [
-                            {
-                                text:
-                                    "You are Nexora AI, a helpful, friendly and intelligent AI assistant. Give clear and useful answers. " +
-                                    message
-                            }
-                        ]
-                    }
-
-                ]
-
-            })
-
-        });
-
-
-    const data =
-        await response.json();
-
+    const data = await response.json();
 
     if (!response.ok) {
 
@@ -699,22 +737,24 @@ async function askNexora(message) {
 
     }
 
-
     const reply =
         data?.candidates?.[0]?.content?.parts
             ?.map(part => part.text || "")
             .join("")
             .trim();
 
-
     if (!reply) {
-
-        throw new Error(
-            "Nexora did not receive a response."
-        );
-
+        throw new Error("Nexora did not receive a response.");
     }
 
+    conversationHistory.push({
+        role: "model",
+        parts: [
+            {
+                text: reply
+            }
+        ]
+    });
 
     return reply;
 }
@@ -767,10 +807,7 @@ async function sendMessage() {
 
         removeThinking();
 
-        addMessage(
-            response,
-            "assistant"
-        );
+       await typeMessage(response);
 
     } catch (error) {
 
@@ -851,25 +888,24 @@ document
    NEW CHAT
    ========================================================= */
 
-newChatButton.addEventListener(
-    "click",
-    () => {
+newChatButton.addEventListener("click", () => {
 
-        chatArea.innerHTML = "";
+    chatArea.innerHTML = "";
 
-        chatArea.appendChild(
-            welcome
-        );
+    chatArea.appendChild(welcome);
 
-        welcome.style.display =
-            "flex";
+    welcome.style.display = "flex";
 
-        messageInput.value = "";
+    messageInput.value = "";
 
-        messageInput.focus();
+    conversationHistory = [];
 
-    }
-);
+    sendButton.disabled = false;
+
+    messageInput.focus();
+
+});
+    
 
 </script>
 
